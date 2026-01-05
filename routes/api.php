@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\AuthorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,7 @@ Route::post('categories' , [CategoryController::class,  'store']);
 Route::put('categories/{identifier}' , [CategoryController::class,  'update']);
 Route::delete('categories/{id}' , [CategoryController::class,  'destroy']);
 
+Route::get('authors' , [AuthorController::class,  'index']);
+Route::post('authors' , [AuthorController::class,  'store']);
+Route::put('authors/{id}' , [AuthorController::class,  'update']);
+Route::delete('authors/{id}' , [AuthorController::class,  'destroy']);
