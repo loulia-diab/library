@@ -27,7 +27,7 @@ class BookController extends Controller
     public function store(StoreBookRequest $request)
     {
         //  return $request->all();
-        $book = Book::create($request->all());
+        $book = Book::create($request->validated());
 
         if ($request->hasFile('cover')){
             $file = $request->file('cover');
@@ -53,7 +53,7 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
-        $book->update($request->all());
+        $book->update($request->validated());
         return ResponseHelper::success("تمت تعديل الكتاب", $book);
 
     }
