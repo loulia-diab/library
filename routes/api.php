@@ -1,11 +1,7 @@
 <?php
 use App\Http\Controllers\Api\CategoryController;
-<<<<<<< HEAD
 use App\Http\Controllers\Api\BookController;
-=======
 use App\Http\Controllers\Api\AuthorController;
-use App\Http\Controllers\BookController;
->>>>>>> 5e9cf6602c51bf27e0ba07ec7b8d000bf8c0e7c9
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
