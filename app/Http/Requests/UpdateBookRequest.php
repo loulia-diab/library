@@ -35,15 +35,10 @@ class UpdateBookRequest extends FormRequest
             'size:13',
             Rule::unique('books', 'ISBN')->ignore($bookId),
         ],
-
         'title' => 'required|string|max:70',
-
         'price' => 'required|numeric|min:0|max:99.99',
-
         'mortgage' => 'required|numeric|min:0|max:9999.99',
-
         'authorship_date' => 'nullable|date',
-
         'category_id' => 'required|integer|exists:categories,id',
     ];
             

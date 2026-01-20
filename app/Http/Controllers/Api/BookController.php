@@ -68,7 +68,12 @@ class BookController extends Controller
             $book->cover = $filename;
             $book->save();
         }
-        return ResponseHelper::success("تمت إضافة الكتاب", $book);
+         $data = $request->validated();
+             if (!empty($data['authors'])) {
+        $book->authors()->attach($data['authors']);
+    }
+
+        return ResponseHelper::success("تمت إضافة الكتاب", $book->load(['category', 'authors']));
     }
 
     /**
@@ -76,7 +81,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        $book = $book->load(['authors:name', 'category']);
+        $book = $book->load(['authors', 'category']);
 
         return ResponseHelper::success("تم إعادة الكتاب بنجاح", new BookResource($book));
     }
@@ -87,8 +92,22 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
-        $book->update($request->all());
-        return ResponseHelper::success("تمت تعديل الكتاب", $book);
+        $data = $request->validated();
+
+    if ($request->hasFile('cover')) {
+        if ($book->cover && \Storage::disk('public')->exists($book->cover)) {
+            \Storage::disk('public')->delete($book->cover);
+        }
+
+        $data['cover'] = $request->file('cover')->store('books', 'cover');
+    }
+
+    $book->update($data);
+
+    if (isset($data['authors'])) {
+        $book->authors()->sync($data['authors']);
+    }
+        return ResponseHelper::success("تمت تعديل الكتاب", $book->load(['category', 'authors']));
 
     }
 
@@ -97,6 +116,9 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
+         if ($book->cover && \Storage::disk('public')->exists($book->cover)) {
+        \Storage::disk('public')->delete($book->cover);
+    }
         $book->delete();
         return ResponseHelper::success("تمت حذف الكتاب", $book);
     }
