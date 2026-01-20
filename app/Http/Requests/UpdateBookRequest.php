@@ -40,6 +40,8 @@ class UpdateBookRequest extends FormRequest
         'mortgage' => 'required|numeric|min:0|max:9999.99',
         'authorship_date' => 'nullable|date',
         'category_id' => 'required|integer|exists:categories,id',
+        'authors'     => 'array',
+        'authors.*'   => 'exists:authors,id',
     ];
             
     }
