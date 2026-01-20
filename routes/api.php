@@ -1,6 +1,11 @@
 <?php
 use App\Http\Controllers\Api\CategoryController;
+<<<<<<< HEAD
 use App\Http\Controllers\Api\BookController;
+=======
+use App\Http\Controllers\Api\AuthorController;
+use App\Http\Controllers\BookController;
+>>>>>>> 5e9cf6602c51bf27e0ba07ec7b8d000bf8c0e7c9
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +28,11 @@ Route::post('categories' , [CategoryController::class,  'store']);
 Route::put('categories/{identifier}' , [CategoryController::class,  'update']);
 Route::delete('categories/{id}' , [CategoryController::class,  'destroy']);
 
+
+Route::get('authors' , [AuthorController::class,  'index']);
+Route::post('authors' , [AuthorController::class,  'store']);
+Route::put('authors/{id}' , [AuthorController::class,  'update']);
+Route::delete('authors/{id}' , [AuthorController::class,  'destroy']);
 
 // Route::apiResource('books' , BookController::class)->except('show');
 // Route::apiResource('books' , BookController::class)->only('index' ,'show');

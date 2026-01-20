@@ -34,6 +34,12 @@ class CategoryController extends Controller
         $category = new Category();
         $category->name = $request->name;
         $category->save();
+         if ($request->hasFile('image')){
+            $file = $request->file('image');
+            Storage::putFileAs('category-images', $file );
+            $category->image = $filename;
+            $category->save();
+        }
         return ResponseHelper::success("تمت إضافة الصنف" , $category);
     }
 
@@ -65,6 +71,6 @@ class CategoryController extends Controller
              return ResponseHelper::failed("لا يمكن حذف الصنف لوجود كتب مرتبطة به" , null);
     
         $category->delete();
-        return ResponseHelper::success("تم حذف الصنف" , $category);
+        return ResponseHelper::success("تم حذف الصنف" , $category); 
     }
 }
