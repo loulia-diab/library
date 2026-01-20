@@ -1,7 +1,7 @@
 <?php
-
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\BookController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,3 +40,4 @@ Route::get('config' , function(){
 Route::get('public-path' , function(){
     return storage_path('app/public');
 });
+
