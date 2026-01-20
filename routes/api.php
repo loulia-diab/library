@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\Api\CategoryController;
+
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\AuthorController;
 
@@ -29,6 +30,7 @@ Route::get('authors' , [AuthorController::class,  'index']);
 Route::post('authors' , [AuthorController::class,  'store']);
 Route::put('authors/{id}' , [AuthorController::class,  'update']);
 Route::delete('authors/{id}' , [AuthorController::class,  'destroy']);
+
 
 // Route::apiResource('books' , BookController::class)->except('show');
 // Route::apiResource('books' , BookController::class)->only('index' ,'show');
